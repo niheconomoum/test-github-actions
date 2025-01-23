@@ -1,0 +1,22 @@
+---
+name: Continuous Delivery
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name:
+        ${{
+          ((github.ref_name == 'main') || startsWith('releases/', github.ref_name))
+          && github.ref_name
+          || null
+        }}
+    steps:
+      - run: echo ${{ vars.ECHO_THIS }}
