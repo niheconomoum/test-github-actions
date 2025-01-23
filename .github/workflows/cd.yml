@@ -14,12 +14,12 @@ jobs:
     environment:
       name:
         ${{
-          ((github.ref_name == 'main') || startsWith('releases/', github.ref_name))
+          ((github.ref_name == 'main') || startsWith(github.ref_name, 'releases/'))
           && github.ref_name
           || null
         }}
     steps:
       - run: echo ref_name is ${{ github.ref_name }}, ref is ${{ github.ref }}
-      - run: echo startsWith is ${{ startsWith('releases/', github.ref_name) }}
-      - run: echo comparison is ${{ ((github.ref_name == 'main') || startsWith('releases/', github.ref_name)) }}
+      - run: echo startsWith is ${{ startsWith(github.ref_name, 'releases/') }}
+      - run: echo comparison is ${{ ((github.ref_name == 'main') || startsWith(github.ref_name, 'releases/')) }}
       - run: echo ${{ vars.ECHO_THIS }}
