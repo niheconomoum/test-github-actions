@@ -19,4 +19,5 @@ jobs:
           || null
         }}
     steps:
+      - run: echo ref_name is ${{ github.ref_name }}, ref is ${{ github.ref }}
       - run: echo ${{ vars.ECHO_THIS }}
